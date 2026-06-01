@@ -16,7 +16,21 @@ export default defineConfig({
   },
   build: {
     outDir: 'dist',
-    assetsDir: 'assets',
     sourcemap: false,
+    target: 'es2015',
+    cssTarget: 'chrome61',
+    // IIFE bundle: single JS file, no ES modules, WeChat webview compatible
+    lib: {
+      entry: path.resolve(__dirname, 'src/main.tsx'),
+      name: 'FreshHarvest',
+      formats: ['iife'],
+      fileName: () => 'app.js',
+    },
+    rollupOptions: {
+      output: {
+        inlineDynamicImports: true,
+        assetFileNames: 'app.[ext]',
+      },
+    },
   },
 });
