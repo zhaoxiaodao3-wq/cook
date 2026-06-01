@@ -1,0 +1,14 @@
+{
+  "miniprogramRoot": "./",
+  "projectname": "fresh-harvest",
+  "description": "Fresh Harvest - 菜谱共享平台",
+  "appid": "wxb6185bdeab582ecf",
+  "setting": {
+    "urlCheck": false,
+    "es6": true,
+    "enhance": true,
+    "postcss": true,
+    "minified": true
+  },
+  "compileType": "miniprogram"
+}
