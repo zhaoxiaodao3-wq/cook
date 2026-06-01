@@ -1,0 +1,93 @@
+@import '../../styles/tokens.scss';
+
+.nav {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  display: flex;
+  justify-content: space-around;
+  align-items: flex-end;
+  padding-bottom: calc(12px + env(safe-area-inset-bottom));
+  padding-top: 8px;
+  background: $color-surface-container-lowest;
+  box-shadow: $shadow-nav;
+  border-top: 1px solid rgba($color-outline-variant, 0.2);
+}
+
+.tab {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  min-height: 52px;
+  border-radius: $radius-full;
+  gap: 4px;
+  transition: background 0.15s ease, transform 0.1s ease;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &:active { transform: scale(0.95); }
+}
+
+.tabActive {
+  background: $color-primary-container;
+}
+
+.tabIcon {
+  width: 22px;
+  height: 22px;
+}
+
+.tabLabel {
+  font-size: 11px;
+  font-weight: $fw-medium;
+  line-height: 1;
+}
+
+.tabLabelActive {
+  color: $color-on-primary-container;
+}
+
+.tabLabelInactive {
+  color: $color-on-surface-variant;
+}
+
+.uploadBtn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 72px;
+  position: relative;
+  background: transparent;
+  border: none;
+  outline: none;
+
+  &:active .uploadCircle { transform: scale(0.9); }
+}
+
+.uploadCircle {
+  position: absolute;
+  top: -20px;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  background: $color-primary;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba($color-primary, 0.35);
+  border: 4px solid $color-surface-container-lowest;
+  transition: transform 0.15s ease;
+}
+
+.uploadLabel {
+  font-size: 11px;
+  font-weight: $fw-medium;
+  margin-top: 26px;
+  color: $color-primary;
+}

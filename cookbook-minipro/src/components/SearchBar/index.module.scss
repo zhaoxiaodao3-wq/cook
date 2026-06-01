@@ -1,0 +1,34 @@
+@import '../../styles/tokens.scss';
+
+.wrap {
+  position: relative;
+  width: 100%;
+}
+
+.input {
+  width: 100%;
+  box-sizing: border-box;
+  background: $color-surface-container-lowest;
+  border: 1px solid $color-outline-variant;
+  border-radius: $radius-full;
+  padding: 10px 16px 10px 40px;
+  font-size: $fs-body-md;
+  color: $color-on-surface;
+  outline: none;
+  min-height: $touch-min;
+  line-height: 1.5;
+
+  &:focus { border-color: $color-primary; }
+}
+
+.placeholder { color: $color-outline; }
+
+.icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: $color-outline;
+  font-size: 18px;
+  pointer-events: none;
+}
