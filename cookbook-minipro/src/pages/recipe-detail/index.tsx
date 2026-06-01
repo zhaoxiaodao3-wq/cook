@@ -87,7 +87,7 @@ export default function RecipeDetailPage() {
             <View className={styles.authorRow}>
               <View className={styles.authorAvatar}>
                 <Image
-                  src=''
+                  src='https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=150&auto=format&fit=crop'
                   mode='aspectFill'
                   style={{ width: '100%', height: '100%' }}
                 />

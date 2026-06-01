@@ -1,4 +1,4 @@
-import { View, Input, Text } from '@tarojs/components';
+import { View, Input } from '@tarojs/components';
 import styles from './index.module.scss';
 
 interface Props {
@@ -8,10 +8,15 @@ interface Props {
   onConfirm?: () => void;
 }
 
-export function SearchBar({ value, onChange, placeholder = '搜索食谱、食材...', onConfirm }: Props) {
+export function SearchBar({ value, onChange, placeholder = '搜索食谱、食材或厨师...', onConfirm }: Props) {
   return (
     <View className={styles.wrap}>
-      <Text className={styles.icon}>{'🔍'}</Text>
+      <View className={styles.iconWrap}>
+        <View className={styles.icon}>
+          <View className={styles.iconCircle} />
+          <View className={styles.iconLine} />
+        </View>
+      </View>
       <Input
         className={styles.input}
         value={value}

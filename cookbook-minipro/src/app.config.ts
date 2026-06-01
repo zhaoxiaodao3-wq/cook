@@ -16,35 +16,16 @@ export default defineAppConfig({
     navigationBarTextStyle: 'black',
   },
   tabBar: {
+    custom: true,
     color: '#45464e',
     selectedColor: '#52c41a',
     backgroundColor: '#ffffff',
     borderStyle: 'white',
     list: [
-      {
-        text: '首页',
-        pagePath: 'pages/home/index',
-        iconPath: '',
-        selectedIconPath: '',
-      },
-      {
-        text: '全部菜品',
-        pagePath: 'pages/all-recipes/index',
-        iconPath: '',
-        selectedIconPath: '',
-      },
-      {
-        text: '上传',
-        pagePath: 'pages/upload/index',
-        iconPath: '',
-        selectedIconPath: '',
-      },
-      {
-        text: '个人中心',
-        pagePath: 'pages/profile/index',
-        iconPath: '',
-        selectedIconPath: '',
-      },
+      { text: '首页', pagePath: 'pages/home/index', iconPath: '', selectedIconPath: '' },
+      { text: '全部菜品', pagePath: 'pages/all-recipes/index', iconPath: '', selectedIconPath: '' },
+      { text: '上传', pagePath: 'pages/upload/index', iconPath: '', selectedIconPath: '' },
+      { text: '个人中心', pagePath: 'pages/profile/index', iconPath: '', selectedIconPath: '' },
     ],
   },
 });

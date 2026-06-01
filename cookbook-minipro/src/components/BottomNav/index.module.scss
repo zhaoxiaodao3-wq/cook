@@ -9,11 +9,10 @@
   display: flex;
   justify-content: space-around;
   align-items: flex-end;
-  padding-bottom: calc(12px + env(safe-area-inset-bottom));
-  padding-top: 8px;
-  background: $color-surface-container-lowest;
-  box-shadow: $shadow-nav;
-  border-top: 1px solid rgba($color-outline-variant, 0.2);
+  padding-bottom: calc(10px + env(safe-area-inset-bottom));
+  padding-top: 6px;
+  background: #ffffff;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.05);
 }
 
 .tab {
@@ -25,37 +24,153 @@
   min-height: 52px;
   border-radius: $radius-full;
   gap: 4px;
-  transition: background 0.15s ease, transform 0.1s ease;
   background: transparent;
-  border: none;
-  outline: none;
+  transition: background 0.15s ease, transform 0.1s ease;
+  padding: 4px 0;
+}
 
-  &:active { transform: scale(0.95); }
+.tab:active {
+  transform: scale(0.95);
 }
 
 .tabActive {
   background: $color-primary-container;
 }
 
-.tabIcon {
+.iconSvg {
   width: 22px;
   height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
-.tabLabel {
+// Home icon — simple house shape using borders
+.homeIcon {
+  width: 20px;
+  height: 18px;
+  position: relative;
+  border: 2px solid $color-on-surface-variant;
+  border-top: none;
+  border-radius: 0 0 2px 2px;
+  margin-top: 6px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -8px;
+    left: -2px;
+    width: 0;
+    height: 0;
+    border-left: 11px solid transparent;
+    border-right: 11px solid transparent;
+    border-bottom: 8px solid $color-on-surface-variant;
+  }
+}
+
+// Recipe icon — simple fork/knife silhouette using stacked lines
+.recipeIcon {
+  width: 18px;
+  height: 20px;
+  position: relative;
+  border: 2px solid $color-on-surface-variant;
+  border-radius: 1px;
+  border-top: none;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: -6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 6px;
+    background: $color-on-surface-variant;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 10px;
+    background: $color-on-surface-variant;
+  }
+}
+
+// Profile icon — simple person shape
+.profileIcon {
+  width: 20px;
+  height: 20px;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 2px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    border: 2px solid $color-on-surface-variant;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 16px;
+    height: 8px;
+    border-radius: 8px 8px 0 0;
+    border: 2px solid $color-on-surface-variant;
+    border-bottom: none;
+  }
+}
+
+.iconActive {
+  border-color: $color-on-primary-container;
+
+  &::before { border-bottom-color: $color-on-primary-container; }
+  &::after { border-color: $color-on-primary-container; background: $color-on-primary-container; }
+}
+
+// Fix for home icon active state
+.homeIcon.iconActive::before {
+  border-bottom-color: $color-on-primary-container;
+}
+
+.recipeIcon.iconActive::before,
+.recipeIcon.iconActive::after {
+  background: $color-on-primary-container;
+  border-color: $color-on-primary-container;
+}
+
+.profileIcon.iconActive::before {
+  border-color: $color-on-primary-container;
+}
+
+.profileIcon.iconActive::after {
+  border-color: $color-on-primary-container;
+}
+
+.label {
   font-size: 11px;
   font-weight: $fw-medium;
   line-height: 1;
-}
-
-.tabLabelActive {
-  color: $color-on-primary-container;
-}
-
-.tabLabelInactive {
   color: $color-on-surface-variant;
 }
 
+.labelActive {
+  font-weight: $fw-semibold;
+  color: $color-on-primary-container;
+}
+
+// Upload button — floating circle
 .uploadBtn {
   display: flex;
   flex-direction: column;
@@ -63,16 +178,15 @@
   justify-content: center;
   width: 72px;
   position: relative;
-  background: transparent;
-  border: none;
-  outline: none;
+}
 
-  &:active .uploadCircle { transform: scale(0.9); }
+.uploadBtn:active .uploadCircle {
+  transform: scale(0.92);
 }
 
 .uploadCircle {
   position: absolute;
-  top: -20px;
+  top: -22px;
   width: 52px;
   height: 52px;
   border-radius: 50%;
@@ -80,14 +194,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba($color-primary, 0.35);
-  border: 4px solid $color-surface-container-lowest;
+  box-shadow: 0 6px 16px rgba($color-primary, 0.3);
+  border: 4px solid #ffffff;
   transition: transform 0.15s ease;
 }
 
-.uploadLabel {
-  font-size: 11px;
-  font-weight: $fw-medium;
-  margin-top: 26px;
-  color: $color-primary;
+.uploadPlus {
+  color: #ffffff;
+  font-size: 26px;
+  line-height: 1;
+  font-weight: 300;
 }

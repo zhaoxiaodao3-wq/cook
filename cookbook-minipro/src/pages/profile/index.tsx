@@ -3,6 +3,8 @@ import Taro from '@tarojs/taro';
 import { BottomNav } from '../../components/BottomNav';
 import styles from './index.module.scss';
 
+const USER_AVATAR = 'https://images.unsplash.com/photo-1438761681033-6461ffad8d80?q=80&w=250&auto=format&fit=crop';
+
 export default function ProfilePage() {
   const stats = { dish_count: 24, rated_count: 128, suggestion_count: 15 };
   const favorites = 56;
@@ -14,7 +16,7 @@ export default function ProfilePage() {
       {/* Profile Header */}
       <View className={styles.profile}>
         <View className={styles.avatar}>
-          <Image className={styles.avatarImg} src='' mode='aspectFill' />
+          <Image className={styles.avatarImg} src={USER_AVATAR} mode='aspectFill' />
         </View>
         <Text className={styles.nickname}>美食家小王</Text>
         <Text className={styles.bio}>热爱生活，享受每一餐的烟火气。</Text>

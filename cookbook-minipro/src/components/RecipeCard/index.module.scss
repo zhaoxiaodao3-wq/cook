@@ -1,8 +1,7 @@
 @import '../../styles/tokens.scss';
-@import '../../styles/global.scss';
 
 .card {
-  background: $color-surface-container-lowest;
+  background: #ffffff;
   border-radius: $radius-xl;
   overflow: hidden;
   box-shadow: $shadow-card;
@@ -42,10 +41,11 @@
   left: 8px;
   background: $color-tag-accent;
   color: #ffffff;
-  font-size: $fs-label-md;
+  font-size: 10px;
   font-weight: $fw-bold;
   padding: 2px 8px;
   border-radius: $radius-sm;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12);
 }
 
 .body {
@@ -59,10 +59,14 @@
 
 .title {
   font-family: $font-display;
-  font-size: $fs-body-lg;
+  font-size: 15px;
   font-weight: $fw-semibold;
   color: $color-on-surface;
-  @include line-clamp(2);
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 2;
+  overflow: hidden;
 }
 
 .meta {
