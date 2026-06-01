@@ -1,0 +1,473 @@
+@import '../../styles/tokens.scss';
+
+// ===== Page container =====
+.page {
+  background: #ffffff;
+  min-height: 100vh;
+  padding-bottom: 40px;
+}
+
+// ===== Hero =====
+.hero {
+  width: 100%;
+  height: 300px;
+  position: relative;
+}
+
+.heroImg {
+  width: 100%;
+  height: 100%;
+}
+
+// ===== Header bar (overlay on hero) =====
+.headerBar {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+}
+
+.backBtn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #ffffff;
+  min-width: $touch-min;
+  min-height: $touch-min;
+}
+
+// ===== Body (overlaps hero with rounded top) =====
+.body {
+  padding: 20px;
+  margin-top: -16px;
+  background: #ffffff;
+  border-radius: $radius-xl $radius-xl 0 0;
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+// ===== Title & Author =====
+.titleRow {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.title {
+  font-family: $font-display;
+  font-size: 24px;
+  font-weight: $fw-bold;
+  color: $color-on-surface;
+}
+
+.authorRow {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.authorAvatar {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  overflow: hidden;
+  background: $color-surface-container;
+}
+
+.authorName {
+  font-size: $fs-body-md;
+  font-weight: $fw-medium;
+  color: $color-on-surface;
+}
+
+.authorTime {
+  font-size: 10px;
+  color: $color-outline;
+}
+
+// ===== Rating =====
+.ratingRow {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.ratingNum {
+  font-weight: $fw-bold;
+  color: $color-tag-accent;
+  font-size: $fs-body-lg;
+}
+
+.ratingCount {
+  font-size: $fs-label-md;
+  color: $color-outline;
+  margin-left: 4px;
+}
+
+// ===== Action buttons =====
+.actions {
+  display: flex;
+  gap: 12px;
+}
+
+.actionBtn {
+  flex: 1;
+  padding: 10px;
+  border-radius: $radius-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-weight: $fw-medium;
+  font-size: $fs-body-md;
+  min-width: $touch-min;
+  min-height: $touch-min;
+  border: none;
+  outline: none;
+}
+
+.actionPrimary {
+  background: $color-primary;
+  color: $color-on-primary;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+.actionOutline {
+  background: transparent;
+  color: $color-primary;
+  border: 1px solid $color-primary;
+
+  &:active {
+    opacity: 0.9;
+  }
+}
+
+// ===== Stats grid =====
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.statCard {
+  background: $color-surface-container-low;
+  padding: 12px;
+  border-radius: $radius-xl;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  border: 1px solid rgba($color-outline-variant, 0.3);
+}
+
+.statName {
+  font-size: 10px;
+  color: $color-outline;
+}
+
+.statVal {
+  font-size: $fs-body-md;
+  font-weight: $fw-bold;
+  color: $color-on-surface;
+}
+
+// ===== Section heading =====
+.sectionH2 {
+  font-family: $font-display;
+  font-size: $fs-headline-sm;
+  font-weight: $fw-bold;
+  color: $color-on-surface;
+  border-left: 4px solid $color-primary;
+  padding-left: 8px;
+  margin-bottom: 12px;
+}
+
+// ===== Ingredient item =====
+.ingItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px;
+  border-bottom: 1px solid rgba($color-outline-variant, 0.5);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+.ingName {
+  font-size: $fs-body-md;
+  color: $color-on-surface;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.ingDot {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid $color-outline-variant;
+  flex-shrink: 0;
+}
+
+.ingAmount {
+  font-size: $fs-body-md;
+  font-weight: $fw-medium;
+  color: $color-on-surface-variant;
+}
+
+// ===== Step =====
+.stepRow {
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.stepNum {
+  width: 24px;
+  height: 24px;
+  border-radius: $radius-sm;
+  background: $color-primary;
+  color: $color-on-primary;
+  font-size: $fs-body-md;
+  font-weight: $fw-bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.stepDesc {
+  font-size: $fs-body-md;
+  color: $color-on-surface;
+  line-height: 1.6;
+  flex: 1;
+}
+
+.stepImg {
+  width: 100%;
+  height: 128px;
+  border-radius: $radius-md;
+  overflow: hidden;
+  margin-top: 8px;
+  background: $color-surface-container;
+}
+
+// ===== Tips box =====
+.tipsBox {
+  background: rgba($color-tag-accent, 0.08);
+  border-radius: $radius-xl;
+  padding: 16px;
+  border: 1px solid rgba($color-tag-accent, 0.3);
+}
+
+.tipsTitle {
+  font-weight: $fw-bold;
+  color: $color-on-surface;
+  margin-bottom: 12px;
+  font-size: $fs-body-md;
+}
+
+.tipsItem {
+  font-size: $fs-body-md;
+  color: $color-on-surface-variant;
+  margin-bottom: 8px;
+  line-height: 1.5;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// ===== Review modal overlay =====
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+}
+
+.overlayBg {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+}
+
+// ===== Modal card =====
+.modal {
+  position: relative;
+  z-index: 101;
+  width: 100%;
+  max-width: 340px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: $radius-xl;
+  padding: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+}
+
+.modalHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid rgba($color-outline-variant, 0.5);
+  padding-bottom: 12px;
+  margin-bottom: 16px;
+}
+
+.modalTitle {
+  font-family: $font-display;
+  font-weight: $fw-bold;
+  font-size: $fs-headline-sm;
+  color: $color-primary;
+}
+
+.modalClose {
+  color: $color-on-surface-variant;
+  font-size: 20px;
+  padding: 4px;
+  border-radius: $radius-full;
+  min-width: $touch-min;
+  min-height: $touch-min;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// ===== Modal context row (thumb + title) =====
+.modalContext {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.modalThumb {
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-md;
+  overflow: hidden;
+  background: $color-surface-container;
+  flex-shrink: 0;
+}
+
+// ===== Stars section =====
+.modalStars {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 20px;
+}
+
+// ===== Textarea =====
+.modalTextarea {
+  width: 100%;
+  background: #ffffff;
+  border: 1px solid $color-outline-variant;
+  border-radius: $radius-xl;
+  padding: 12px;
+  font-size: $fs-body-md;
+  min-height: 80px;
+  margin-bottom: 16px;
+  box-sizing: border-box;
+  outline: none;
+  transition: border-color 0.15s ease;
+  resize: none;
+
+  &:focus {
+    border-color: $color-primary;
+  }
+}
+
+// ===== Anonymous toggle =====
+.toggleRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: $fs-label-md;
+  color: $color-on-surface-variant;
+}
+
+.toggle {
+  width: 44px;
+  height: 24px;
+  border-radius: 12px;
+  padding: 2px;
+  position: relative;
+  transition: background 0.2s ease;
+}
+
+.toggleOn {
+  background: $color-primary;
+}
+
+.toggleOff {
+  background: $color-surface-variant;
+}
+
+.toggleKnob {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #ffffff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.toggleKnobOn {
+  transform: translateX(20px);
+}
+
+.toggleKnobOff {
+  transform: translateX(0);
+}
+
+// ===== Send button =====
+.modalSend {
+  width: 100%;
+  background: $color-primary;
+  color: $color-on-primary;
+  padding: 12px;
+  border-radius: $radius-xl;
+  font-weight: $fw-bold;
+  font-size: $fs-body-md;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  box-shadow: 0 4px 12px rgba($color-primary, 0.3);
+  min-height: $touch-min;
+  border: none;
+  outline: none;
+
+  &:active {
+    opacity: 0.9;
+  }
+}

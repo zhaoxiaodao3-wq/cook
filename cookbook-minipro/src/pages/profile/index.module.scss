@@ -1,0 +1,138 @@
+@import '../../styles/tokens.scss';
+
+.page {
+  min-height: 100vh;
+  background: $color-surface;
+  padding-bottom: 100px;
+}
+
+.profile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 40px $space-margin-page 24px;
+}
+
+.avatar {
+  width: 96px;
+  height: 96px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid $color-surface-container-lowest;
+  box-shadow: $shadow-card;
+  margin-bottom: 16px;
+}
+
+.avatarImg { width: 100%; height: 100%; }
+
+.nickname {
+  font-family: $font-display;
+  font-size: 20px;
+  font-weight: $fw-bold;
+  color: $color-on-surface;
+  margin-bottom: 4px;
+}
+
+.bio {
+  font-size: $fs-body-md;
+  color: $color-on-surface-variant;
+  margin-bottom: 20px;
+}
+
+.followCounts {
+  display: flex;
+  gap: 32px;
+}
+
+.countItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.countNum {
+  font-family: $font-display;
+  font-size: $fs-headline-sm;
+  font-weight: $fw-bold;
+  color: $color-on-surface;
+}
+
+.countLabel {
+  font-size: $fs-label-md;
+  color: $color-outline;
+}
+
+.body {
+  padding: 0 $space-margin-page;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.statsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+
+.statCard {
+  background: $color-surface-container-lowest;
+  border-radius: $radius-xl;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  box-shadow: $shadow-card;
+  border: 1px solid rgba($color-outline-variant, 0.3);
+  min-height: $touch-min;
+
+  &:active { border-color: $color-primary-container; }
+}
+
+.statValue {
+  font-family: $font-display;
+  font-size: 24px;
+  font-weight: $fw-bold;
+  color: $color-primary;
+}
+
+.statLabel {
+  font-size: $fs-label-md;
+  color: $color-on-surface-variant;
+}
+
+.menu {
+  background: $color-surface-container-lowest;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-card;
+  border: 1px solid rgba($color-outline-variant, 0.3);
+  overflow: hidden;
+}
+
+.menuItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  border-bottom: 1px solid rgba($color-outline-variant, 0.3);
+  min-height: $touch-min;
+
+  &:last-child { border-bottom: none; }
+  &:active { background: $color-surface-container; }
+}
+
+.menuLeft {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.menuIcon { font-size: 20px; color: $color-primary; }
+
+.menuText { font-size: $fs-body-md; color: $color-on-surface; }
+
+.menuTextDanger { color: $color-error; }
+
+.menuArrow { font-size: 18px; color: $color-outline-variant; }

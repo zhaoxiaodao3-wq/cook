@@ -1,0 +1,62 @@
+@import './tokens.scss';
+
+// ===== Reset =====
+page {
+  font-family: $font-body;
+  font-size: $fs-body-md;
+  line-height: $lh-body-md;
+  color: $color-on-surface;
+  background-color: $color-surface;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+// ===== Utilities =====
+
+// Hide scrollbar for tab containers
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+// Safe area padding for bottom tab content (iPhone X+ notch)
+.safe-bottom {
+  padding-bottom: constant(safe-area-inset-bottom);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+// Active press feedback — Flat Design Mobile touch-first interaction
+// Subtle scale-down on press, no shadow change (flat design principle)
+.active-press {
+  transition: transform 0.15s ease;
+  &:active {
+    transform: scale(0.97);
+  }
+}
+
+// ===== Mixins =====
+
+// Line clamp — truncate multi-line text with ellipsis
+@mixin line-clamp($lines) {
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: $lines;
+  overflow: hidden;
+}
+
+// ===== Skeleton Loading =====
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    $color-surface-container 25%,
+    $color-surface-container-high 50%,
+    $color-surface-container 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-shimmer 1.5s infinite;
+  border-radius: $radius-sm;
+}
+
+@keyframes skeleton-shimmer {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
