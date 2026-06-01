@@ -1,0 +1,36 @@
+<h2>Taro React 小程序 UI 库选型</h2>
+<p class="subtitle">React 代码已有 1200+ 行，现在选 UI 组件库来替代 Tailwind + Lucide</p>
+
+<div class="options">
+  <div class="option" data-choice="a" onclick="toggleSelect(this)">
+    <div class="letter">A</div>
+    <div class="content">
+      <h3>NutUI + SCSS Modules</h3>
+      <p>京东出品，专为移动端设计，组件覆盖率高（卡片、评分、导航栏、表单等），与 Taro 深度集成。SCSS 变量对齐 Design Tokens。</p>
+    </div>
+  </div>
+  <div class="option" data-choice="b" onclick="toggleSelect(this)">
+    <div class="letter">B</div>
+    <div class="content">
+      <h3>Taro UI + SCSS Modules</h3>
+      <p>社区最成熟，中文文档好，组件全面。但更新较慢，部分组件样式偏老旧。</p>
+    </div>
+  </div>
+  <div class="option" data-choice="c" onclick="toggleSelect(this)">
+    <div class="letter">C</div>
+    <div class="content">
+      <h3>纯手写组件 + SCSS Modules</h3>
+      <p>完全自定义，与设计稿 1:1 对齐。但按钮、输入框、弹窗、星级评分、标签等都要从零写，工期最长。</p>
+    </div>
+  </div>
+</div>
+
+<div class="section">
+  <h3>分析维度</h3>
+  <div class="pros-cons">
+    <div class="pros"><h4>NutUI 优势</h4><ul><li>移动端原生体感最好</li><li>Steps/Stepper 组件直接匹配制作步骤需求</li><li>Rate 星级评分内置</li><li>京东持续维护，React 版本活跃</li></ul></div>
+    <div class="cons"><h4>NutUI 劣势</h4><ul><li>NutUI 4.x 需 React 18（当前代码 React 19）可能有兼容问题</li><li>默认主题色需全局覆盖</li><li>社区案例少于 Taro UI</li></ul></div>
+  </div>
+</div>
+
+<p class="subtitle" style="margin-top:24px">推荐 A — NutUI 更匹配菜谱小程序的移动端交互需求</p>

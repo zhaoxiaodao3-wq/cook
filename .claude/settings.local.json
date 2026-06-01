@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(where python *)",
+      "Bash(C:/Users/YIL/AppData/Local/Python/pythoncore-3.14-64/python.exe *)",
+      "Bash(taskkill //F //IM python.exe)",
+      "Bash(alembic revision *)"
+    ]
+  }
+}
