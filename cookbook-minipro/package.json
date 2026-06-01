@@ -36,6 +36,7 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.24.0",
+    "@nutui/nutui-react-taro": "^2.6.0",
     "@tarojs/components": "3.6.35",
     "@tarojs/helper": "3.6.35",
     "@tarojs/plugin-framework-react": "3.6.35",
@@ -51,9 +52,9 @@
     "@tarojs/runtime": "3.6.35",
     "@tarojs/shared": "3.6.35",
     "@tarojs/taro": "3.6.35",
-    "@nutui/nutui-react-taro": "^2.6.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "tsconfig-paths-webpack-plugin": "^4.2.0"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
