@@ -151,8 +151,64 @@ cookbook-minipro/
 9. 微信登录集成
 10. API 对接 + 真机测试
 
+## UI/UX 设计规范 (ui-ux-pro-max 验证)
+
+### 产品类型匹配
+- **Product Type**: Recipe & Cooking App → Claymorphism + Flat Design Mobile
+- **Color Palette**: Grocery Green (#52c41a primary) + amber accent (#d78a1e for tags)
+- **Style**: Flat Design Mobile (Touch-First) — 零阴影、色块分区、48px 触摸目标
+
+### 触控与交互 (Critical)
+| 规则 | 标准 |
+|------|------|
+| 触摸目标最小尺寸 | 44×44px (微信小程序规范) |
+| 触摸间距 | 最小 8px gap |
+| 按压反馈 | scale 0.95-0.97, 80-150ms 内响应 |
+| 加载反馈 | 超过 300ms 操作显示 loading/skeleton |
+| 禁用状态 | 透明度 0.4 + 不可点击 |
+
+### 导航规范 (High)
+| 规则 | 标准 |
+|------|------|
+| 底部导航项数 | ≤5 (我们 4 项: 首页/全部菜品/上传/个人中心) |
+| 返回行为 | 页面栈保持，不跳转到无关页面 |
+| Tab 状态保持 | `unmountOnBlur: false` (Tab 切换保留滚动位置和表单状态) |
+| 活跃状态标识 | 颜色 + 字重变化 |
+
+### 表单规范 (Medium)
+| 规则 | 标准 |
+|------|------|
+| 标签可见 | 每个 Input 有对应 label (非 placeholder-only) |
+| 验证时机 | blur 时验证，非每次击键 |
+| 错误展示 | 红色边框 + 错误信息在字段下方 |
+| 提交反馈 | 按钮 loading → 成功/失败提示 |
+| 键盘类型 | 食材用量用数字键盘，文本用默认键盘 |
+| 草稿保存 | 长表单自动保存草稿 (localStorage) |
+
+### 图片与性能
+| 规则 | 标准 |
+|------|------|
+| 图片优化 | 上传前 compressImage 压缩 |
+| 懒加载 | 列表图片使用 lazy-load |
+| 骨架屏 | 列表加载显示 skeleton (非空白) |
+| 列表虚拟化 | 50+ 条目的长列表考虑虚拟滚动 |
+
+### 可访问性基线
+- 所有 icon-only 按钮添加 `aria-label`
+- 错误状态不能仅靠颜色传达 (加图标+文字)
+- 重要图片添加 `alt` 描述
+- 评分组件支持键盘操作 (无障碍)
+
+### 设计风格确认
+- **主风格**: Flat Design Mobile — 内容通过色块分区，不使用大量阴影
+- **辅助风格**: Bento Grid — 卡片式模块布局，不同大小的卡片组合
+- **色板验证**: Grocery & Recipe (#52c41a 绿 + #d78a1e 金) 已匹配 ui-ux-pro-max 推荐
+- **图标**: NutUI Icons 统一 2px 线宽 (替代 Material Icons 的 FILL 变体问题)
+
 ## 不做的事情
 - 客户端数据缓存 (首版用 onShow 刷新)
 - 离线支持
 - 拖拽排序 (用上下箭头按钮替代)
 - 动画/过度效果 (首版实现核心功能)
+- Emoji 作为图标 (使用 NutUI Icons 矢量图标)
+- 自定义手势 (不覆盖系统返回手势)
