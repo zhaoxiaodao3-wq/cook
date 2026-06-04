@@ -9,9 +9,14 @@ from httpx import AsyncClient, ASGITransport
 from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine, async_sessionmaker
 
 from app.main import app
-from app.models.base import Base
+from app.models import Base  # noqa: F401 - ensure all models are loaded
+from app.core.config import settings
 from app.core.deps import get_db
 from app.core.security import create_access_token
+
+# 测试环境使用开发模式登录，不调用微信API
+settings.WECHAT_APP_ID = ""
+settings.WECHAT_APP_SECRET = ""
 
 TEST_DATABASE_URL = "sqlite+aiosqlite:///./test.db"
 

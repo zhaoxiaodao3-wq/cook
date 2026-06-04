@@ -9,6 +9,7 @@ class Category(Base, TimestampMixin):
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(32), unique=True, nullable=False)
+    key: Mapped[str | None] = mapped_column(String(32), unique=True, nullable=True)
     icon: Mapped[str | None] = mapped_column(String(64), nullable=True)
     sort_order: Mapped[int] = mapped_column(Integer, nullable=False, default=0)
 

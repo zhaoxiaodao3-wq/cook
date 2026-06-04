@@ -3,31 +3,47 @@ from pydantic import BaseModel, Field
 
 
 class WechatLoginIn(BaseModel):
-    code: str = Field(..., description="微信小程序登录凭证（code）")
-
-
-class UserUpdateIn(BaseModel):
-    nickname: str | None = Field(None, description="昵称")
-    avatar_url: str | None = Field(None, description="头像地址")
+    code: str = Field(..., description="微信小程序登录凭证")
+    nickName: str = Field("", description="用户填写的昵称")
+    avatarUrl: str = Field("", description="头像URL，若为https CDN地址则传入")
 
 
 class UserOut(BaseModel):
     id: str
-    nickname: str
-    avatar_url: str | None
-    role: str
-    created_at: datetime
+    name: str
+    avatar: str
+    bio: str
 
     model_config = {"from_attributes": True}
 
 
 class UserStatsOut(BaseModel):
-    dish_count: int = Field(0, description="上传的菜品数量")
-    rated_count: int = Field(0, description="评分过的菜品数量")
-    suggestion_count: int = Field(0, description="写过的建议数量")
+    uploads: int = Field(0, description="上传的菜品数")
+    reviews: int = Field(0, description="评分过的菜品数")
+    suggestions: int = Field(0, description="写过的建议数")
+    favorites: int = Field(0, description="收藏数")
+
+
+class UserProfileOut(BaseModel):
+    id: str
+    name: str
+    avatar: str
+    bio: str
+    stats: UserStatsOut | None = None
+
+    model_config = {"from_attributes": True}
+
+
+class UserUpdateIn(BaseModel):
+    name: str | None = Field(None, description="昵称")
+    bio: str | None = Field(None, description="简介")
 
 
 class LoginOut(BaseModel):
-    access_token: str = Field(..., description="JWT 访问令牌")
-    token_type: str = Field("bearer", description="令牌类型")
-    user: UserOut = Field(..., description="用户信息")
+    token: str = Field(..., description="JWT 访问令牌")
+    expiresIn: int = Field(7200, description="过期时间（秒）")
+    user: UserOut
+
+
+class AvatarOut(BaseModel):
+    avatarUrl: str = Field(..., description="头像URL")

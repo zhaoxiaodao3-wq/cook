@@ -14,6 +14,9 @@ router = APIRouter(prefix="/auth", tags=["认证"])
 
 @router.post("/wechat-login", response_model=ApiResponse[LoginOut], summary="微信登录")
 async def wechat_login(body: WechatLoginIn, db: AsyncSession = Depends(get_db)):
+    if not body.nickName or len(body.nickName) > 32:
+        raise HTTPException(status_code=400, detail="昵称不能为空且不超过32字")
+
     if settings.WECHAT_APP_ID and settings.WECHAT_APP_SECRET:
         async with httpx.AsyncClient() as client:
             resp = await client.get(
@@ -32,6 +35,18 @@ async def wechat_login(body: WechatLoginIn, db: AsyncSession = Depends(get_db)):
     else:
         openid = f"dev_{body.code}"
 
-    user = await get_or_create_user(db, openid)
+    avatar_url = body.avatarUrl if body.avatarUrl and body.avatarUrl.startswith("https://") else ""
+    user = await get_or_create_user(db, openid, nickname=body.nickName, avatar_url=avatar_url)
     token = create_access_token(user.id)
-    return ApiResponse(data=LoginOut(access_token=token, user=UserOut.model_validate(user)))
+
+    user_out = UserOut(
+        id=user.id,
+        name=user.nickname,
+        avatar=user.avatar_url or "",
+        bio=user.bio or "",
+    )
+    return ApiResponse(data=LoginOut(
+        token=token,
+        expiresIn=settings.JWT_EXPIRE_MINUTES * 60,
+        user=user_out,
+    ))

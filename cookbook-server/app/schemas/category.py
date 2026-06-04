@@ -3,10 +3,11 @@ from pydantic import BaseModel, Field
 
 
 class CategoryOut(BaseModel):
-    id: int = Field(..., description="分类ID")
-    name: str = Field(..., description="分类名称")
-    icon: str | None = Field(None, description="图标标识")
-    sort_order: int = Field(..., description="排序")
-    created_at: datetime = Field(..., description="创建时间")
+    id: int
+    name: str
+    key: str | None = None
+    icon: str | None = None
+    sort_order: int = 0
+    created_at: datetime | None = None
 
     model_config = {"from_attributes": True}

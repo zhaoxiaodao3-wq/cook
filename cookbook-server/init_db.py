@@ -1,7 +1,6 @@
 """One-time script to create all tables in PostgreSQL. Run: python init_db.py"""
 import psycopg2
 
-# Replace password if you set a different one during install
 conn = psycopg2.connect(
     host="localhost",
     port=5432,
@@ -17,6 +16,7 @@ CREATE TABLE IF NOT EXISTS users (
     openid VARCHAR(128) UNIQUE NOT NULL,
     nickname VARCHAR(64) NOT NULL,
     avatar_url VARCHAR(512),
+    bio TEXT,
     role VARCHAR(16) NOT NULL DEFAULT 'user',
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
     updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
@@ -29,6 +29,7 @@ cur.execute("""
 CREATE TABLE IF NOT EXISTS categories (
     id SERIAL PRIMARY KEY,
     name VARCHAR(32) UNIQUE NOT NULL,
+    key VARCHAR(32) UNIQUE,
     icon VARCHAR(64),
     sort_order INTEGER NOT NULL DEFAULT 0,
     created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
@@ -43,10 +44,14 @@ CREATE TABLE IF NOT EXISTS dishes (
     cover VARCHAR(512),
     description TEXT,
     category_id INTEGER NOT NULL REFERENCES categories(id),
+    cuisine VARCHAR(32),
+    tags JSONB,
     cooking_time INTEGER,
     difficulty SMALLINT CHECK (difficulty >= 1 AND difficulty <= 3),
     servings INTEGER,
     tips TEXT,
+    nutrition TEXT,
+    suitable_for VARCHAR(128),
     author_id VARCHAR(36) NOT NULL REFERENCES users(id),
     status VARCHAR(16) NOT NULL DEFAULT 'published',
     avg_rating NUMERIC(2,1) NOT NULL DEFAULT 0.0,
@@ -60,8 +65,8 @@ CREATE TABLE IF NOT EXISTS ingredients (
     id VARCHAR(36) PRIMARY KEY,
     dish_id VARCHAR(36) NOT NULL REFERENCES dishes(id) ON DELETE CASCADE,
     name VARCHAR(64) NOT NULL,
-    amount NUMERIC(8,2) NOT NULL,
-    unit VARCHAR(16) NOT NULL,
+    amount VARCHAR(32) NOT NULL DEFAULT '',
+    unit VARCHAR(16) NOT NULL DEFAULT '',
     sort_order INTEGER NOT NULL DEFAULT 0
 )
 """)
@@ -103,7 +108,40 @@ CREATE TABLE IF NOT EXISTS suggestions (
 )
 """)
 
+cur.execute("""
+CREATE TABLE IF NOT EXISTS favorites (
+    id VARCHAR(36) PRIMARY KEY,
+    user_id VARCHAR(36) NOT NULL REFERENCES users(id),
+    dish_id VARCHAR(36) NOT NULL REFERENCES dishes(id) ON DELETE CASCADE,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    UNIQUE(user_id, dish_id)
+)
+""")
+
+cur.execute("""
+CREATE TABLE IF NOT EXISTS drafts (
+    id VARCHAR(36) PRIMARY KEY,
+    user_id VARCHAR(36) NOT NULL REFERENCES users(id),
+    title VARCHAR(128),
+    step INTEGER NOT NULL DEFAULT 0,
+    cover_image VARCHAR(512),
+    duration INTEGER,
+    difficulty VARCHAR(8),
+    servings INTEGER,
+    ingredients JSONB,
+    steps JSONB,
+    category VARCHAR(32),
+    cuisine VARCHAR(32),
+    tags JSONB,
+    crowd VARCHAR(128),
+    tips TEXT,
+    created_at TIMESTAMPTZ NOT NULL DEFAULT now(),
+    updated_at TIMESTAMPTZ NOT NULL DEFAULT now()
+)
+""")
+
 conn.commit()
 cur.close()
 conn.close()
-print("建表完成！7 张表已成功创建。")
+print("建表完成！9 张表已成功创建。")

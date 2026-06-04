@@ -1,110 +1,158 @@
 from datetime import datetime
 from pydantic import BaseModel, Field
 
-from app.schemas.user import UserOut
-from app.schemas.category import CategoryOut
+DIFFICULTY_MAP = {1: "简单", 2: "中等", 3: "困难"}
+DIFFICULTY_REVERSE = {"简单": 1, "中等": 2, "困难": 3}
+
+
+class AuthorBrief(BaseModel):
+    id: str
+    name: str
+    avatar: str
+
+    model_config = {"from_attributes": True}
 
 
 class IngredientIn(BaseModel):
     name: str = Field(..., description="食材名称")
-    amount: float = Field(..., description="用量")
-    unit: str = Field(..., description="单位（克、毫升、个等）")
-    sort_order: int = Field(0, description="排序")
+    amount: str = Field("", description="用量")
+    unit: str = Field("", description="单位")
 
 
 class IngredientOut(BaseModel):
-    id: str
     name: str
-    amount: float
+    amount: str
     unit: str
-    sort_order: int
 
     model_config = {"from_attributes": True}
 
 
 class StepIn(BaseModel):
-    step_number: int = Field(..., description="步骤序号")
-    description: str = Field(..., description="步骤说明")
+    id: int | None = Field(None, description="步骤ID（前端时间戳）")
+    desc: str = Field(..., description="步骤说明")
     image: str | None = Field(None, description="步骤配图")
-    duration: int | None = Field(None, description="该步骤耗时（分钟）")
 
 
 class StepOut(BaseModel):
-    id: str
-    step_number: int
-    description: str
+    id: int
+    desc: str
     image: str | None = None
-    duration: int | None = None
 
     model_config = {"from_attributes": True}
 
 
-class DishCreateIn(BaseModel):
-    name: str = Field(..., max_length=128, description="菜品名称")
-    cover: str | None = Field(None, description="封面图URL")
-    description: str | None = Field(None, description="菜品简介")
-    category_id: int = Field(..., description="所属分类ID")
-    cooking_time: int | None = Field(None, description="烹饪时长（分钟）")
-    difficulty: int | None = Field(None, ge=1, le=3, description="难度：1简单 2中等 3困难")
+class ReviewOut(BaseModel):
+    id: str
+    userId: str
+    userName: str
+    userAvatar: str
+    rating: int
+    date: str
+
+    model_config = {"from_attributes": True}
+
+
+class SuggestionOut(BaseModel):
+    id: str
+    userId: str
+    userName: str
+    userAvatar: str
+    content: str
+    date: str
+
+    model_config = {"from_attributes": True}
+
+
+class RecipeCreateIn(BaseModel):
+    title: str = Field(..., max_length=128, description="菜谱名称")
+    coverImage: str | None = Field(None, description="封面图URL")
+    duration: int | None = Field(None, description="烹饪时长（分钟）")
+    difficulty: str | None = Field(None, description="难度：简单/中等/困难")
+    category: str = Field(..., description="分类：breakfast/lunch/dinner/dessert")
+    cuisine: str | None = Field(None, description="菜系")
+    tags: list[str] = Field([], description="标签")
     servings: int | None = Field(None, description="份量")
-    tips: str | None = Field(None, description="小贴士")
-    nutrition: str | None = Field(None, description="营养信息")
-    suitable_for: str | None = Field(None, description="适合人群")
-    status: str = Field("published", description="状态：published 发布 / draft 草稿")
     ingredients: list[IngredientIn] = Field([], description="食材清单")
     steps: list[StepIn] = Field([], description="制作步骤")
+    tips: str | None = Field(None, description="贴士")
+    crowd: str | None = Field(None, description="适合人群")
 
 
-class DishUpdateIn(BaseModel):
-    name: str | None = Field(None, max_length=128, description="菜品名称")
-    cover: str | None = Field(None, description="封面图URL")
-    description: str | None = Field(None, description="菜品简介")
-    category_id: int | None = Field(None, description="所属分类ID")
-    cooking_time: int | None = Field(None, description="烹饪时长（分钟）")
-    difficulty: int | None = Field(None, ge=1, le=3, description="难度：1简单 2中等 3困难")
+class RecipeUpdateIn(BaseModel):
+    title: str | None = Field(None, max_length=128, description="菜谱名称")
+    coverImage: str | None = Field(None, description="封面图URL")
+    duration: int | None = Field(None, description="烹饪时长（分钟）")
+    difficulty: str | None = Field(None, description="难度：简单/中等/困难")
+    category: str | None = Field(None, description="分类")
+    cuisine: str | None = Field(None, description="菜系")
+    tags: list[str] | None = Field(None, description="标签")
     servings: int | None = Field(None, description="份量")
-    tips: str | None = Field(None, description="小贴士")
-    nutrition: str | None = Field(None, description="营养信息")
-    suitable_for: str | None = Field(None, description="适合人群")
-    status: str | None = Field(None, description="状态：published 发布 / draft 草稿")
-    ingredients: list[IngredientIn] | None = Field(None, description="食材清单（不传则不更新）")
-    steps: list[StepIn] | None = Field(None, description="制作步骤（不传则不更新）")
+    ingredients: list[IngredientIn] | None = Field(None, description="食材清单")
+    steps: list[StepIn] | None = Field(None, description="制作步骤")
+    tips: str | None = Field(None, description="贴士")
+    crowd: str | None = Field(None, description="适合人群")
 
 
-class DishListOut(BaseModel):
+class RecipeListItem(BaseModel):
     id: str
-    name: str
-    cover: str | None
-    category_id: int
-    cooking_time: int | None
-    difficulty: int | None
-    avg_rating: float
-    rating_count: int
-    author: UserOut
-    created_at: datetime
+    title: str
+    coverImage: str | None
+    author: AuthorBrief | None = None
+    rating: float
+    ratingCount: int
+    createdAt: str
+    duration: int | None
+    difficulty: str | None
+    category: str | None
+    cuisine: str | None
+    tags: list[str] = []
+    servings: int | None
+    isFavorite: bool | None = None
 
     model_config = {"from_attributes": True}
 
 
-class DishDetailOut(BaseModel):
+class RecipeDetailOut(BaseModel):
     id: str
-    name: str
-    cover: str | None
-    description: str | None
-    category: CategoryOut
-    cooking_time: int | None
-    difficulty: int | None
+    title: str
+    coverImage: str | None
+    author: AuthorBrief | None = None
+    rating: float
+    ratingCount: int
+    createdAt: str
+    duration: int | None
+    difficulty: str | None
+    category: str | None
+    cuisine: str | None
+    tags: list[str] = []
     servings: int | None
-    tips: str | None
-    nutrition: str | None
-    suitable_for: str | None
-    status: str
-    avg_rating: float
-    rating_count: int
-    author: UserOut
     ingredients: list[IngredientOut] = []
     steps: list[StepOut] = []
-    created_at: datetime
-    updated_at: datetime
+    tips: str | None
+    crowd: str | None
+    reviews: list[ReviewOut] = []
+    suggestions: list[SuggestionOut] = []
+    isFavorite: bool | None = None
+    myReview: dict | None = None
+    mySuggestion: dict | None = None
+
+    model_config = {"from_attributes": True}
+
+
+class RankedRecipeOut(BaseModel):
+    id: str
+    title: str
+    coverImage: str | None
+    author: AuthorBrief | None = None
+    rating: float
+    ratingCount: int
+    createdAt: str
+    duration: int | None
+    difficulty: str | None
+    category: str | None
+    cuisine: str | None
+    tags: list[str] = []
+    servings: int | None
+    isFavorite: bool | None = None
 
     model_config = {"from_attributes": True}

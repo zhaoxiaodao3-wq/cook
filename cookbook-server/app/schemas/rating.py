@@ -1,33 +1,37 @@
 from datetime import datetime
 from pydantic import BaseModel, Field
 
-from app.schemas.user import UserOut
+
+class ReviewCreateIn(BaseModel):
+    rating: int = Field(..., ge=1, le=5, description="评分：1-5")
 
 
-class RatingCreateIn(BaseModel):
-    stars: int = Field(..., ge=1, le=5, description="星级：1-5")
-
-
-class RatingUpdateIn(BaseModel):
-    stars: int = Field(..., ge=1, le=5, description="星级：1-5")
-
-
-class RatingOut(BaseModel):
+class ReviewOut(BaseModel):
     id: str
-    dish_id: str
-    user: UserOut
-    stars: int
-    created_at: datetime
+    userId: str
+    userName: str
+    userAvatar: str
+    rating: int
+    date: str
 
     model_config = {"from_attributes": True}
 
 
-class UserRatingOut(BaseModel):
-    id: str
-    dish_id: str
-    dish_name: str
-    dish_cover: str | None
-    stars: int
-    created_at: datetime
+class ReviewResponse(BaseModel):
+    review: ReviewOut
+    recipeRating: float
+    ratingCount: int
+
+
+class ReviewDeleteResponse(BaseModel):
+    recipeRating: float
+    ratingCount: int
+
+
+class UserReviewOut(BaseModel):
+    recipeId: str
+    rating: int
+    date: str
+    recipe: dict | None = None
 
     model_config = {"from_attributes": True}
