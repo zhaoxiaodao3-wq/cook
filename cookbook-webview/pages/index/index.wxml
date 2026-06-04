@@ -1,7 +1,0 @@
-<!-- Fresh Harvest H5 WebView Container -->
-<web-view
-  src="{{h5Url}}"
-  bindmessage="onMessage"
-  bindload="onLoad"
-  binderror="onError"
-/>
